@@ -1,0 +1,40 @@
+Dies ist ein Widerrufszertifikat für den OpenPGP Schlüssel:
+
+pub   rsa4096 2021-03-26 [S] [verfällt: 2022-03-26]
+      D85E0AC2CC0528E375BDA1BBB52608C81313416F
+uid          Sample Debian Package and Repository Signing Key (completely insecure) <package-signing@example.com>
+
+Ein Widerrufszertifikat ist eine Art von Notausschalter der öffentlich
+verlautbart, daß ein Schlüssel nicht mehr benutzt werden soll.  Es ist
+nicht möglich, ein einmal veröffentlichtes Widerrufszertifikat wieder
+zurückzuziehen.
+
+Benutzen Sie es, um einen Schlüssel zu widerrufen, falls der private
+Schlüssel verloren wurde oder kompromittiert ist.  Falls jedoch auf
+den privaten Schlüssel noch zugegriffen werden kann, so ist es besser,
+ein neues Widerrufszertifikat zu erzeugen, um den Grund des Widerrufs
+mit angeben zu können.  Weitere Informationen finden Sie im GnuPG
+Handbuch unter der Beschreibung des gpg Kommandos "--generate-revocation".
+
+Um eine versehentliche Aktivierung des Widerrufszertifikats zu
+vermeiden, wurde ein Doppelpunkt direkt vor den 5 Spiegelstrichen
+unten eingefügt.  Vor dem Import dieses Widerrufszertifikats
+entfernen Sie bitte diesen Doppelpunkt mittels eines Texteditors.
+
+:-----BEGIN PGP PUBLIC KEY BLOCK-----
+Comment: This is a revocation certificate
+
+iQI2BCABCgAgFiEE2F4KwswFKON1vaG7tSYIyBMTQW8FAmBeVa0CHQAACgkQtSYI
+yBMTQW9pkA//f3Sed7D/tvk1StRayKu3ynmFCL+vj3DRHZJUEHNvqBn27faIymrS
+aoOpSj+Gs5xLGt/US+3wts3LJl5G4hExLZy9loNfhz4whMQ2o9IpFVpPE1DVkIhh
+5V46xS8yxx5b5j558lEq8Z49FC2iQGxaPdX8QwRYIXg02J1q/dESS/t6OCSLIuPJ
+H03PNKoWs2NtIWVACDq0dxNjES+JXBx1UrbtmZ+IQodMOqvuTtZZz2C3dk3GF3Mf
+Gn2dRgZjRpu2TOx2Py4LFKtMJfDBZQOYFVX08Y1fLBtH5T68HpK40xofn9+DE5/b
+p8SQ/p89lOCKPLyL3+tjpLu/POVpePpfM/sDGvRGQ+ExDaBgcg62XlDm9naIS31+
+EuQ0XNM5GmicWZ9mkDTHQyzlHSfzfCJOsFHrWs5kIZ1iM3SpCYKDsWWvyHeW1weO
+ltBx2htHp6sBaCLVtNQlbZM7u3Mrps2mOsylE0IeIGeCxTSDpy10XJxjX96WIFWP
+59pTPORrhxbEw4Q1LvWoi2FtdIpdhTMvmcasL+LFz2jA0l60PFVE01JkYkcNqZ9T
+QGffVC/k1aDVOef+0lVrBK+cWT6CLtrjp/wbyONLPyRXncuP6BHbObTle3MKHFbK
+how9PJlh82/KSvFiAKAsrJ9w4gxD2ctl0eMrJvhbZ9yUxVUgCpGqsoc=
+=Rl5R
+-----END PGP PUBLIC KEY BLOCK-----

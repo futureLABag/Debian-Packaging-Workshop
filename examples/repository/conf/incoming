@@ -1,0 +1,7 @@
+Name: workshop-testing
+Default: workshop-testing
+Cleanup: on_error on_deny
+IncomingDir: incoming/workshop-testing
+MorgueDir: morgue/workshop-testing
+LogDir: log/workshop-testing
+TempDir: temp/workshop-testing

@@ -1,0 +1,19 @@
+Codename: workshop-testing
+Suite: testing
+Components: main
+Architectures: amd64 source
+Description: Debian Repository for testing
+Origin: example.com
+Uploaders: uploaders/workshop-testing
+Contents: . .gz .bz2
+SignWith: D85E0AC2CC0528E375BDA1BBB52608C81313416F
+
+Codename: workshop
+Suite: stable
+Components: main
+Architectures: amd64 source
+Description: Stable Debian Repository
+Origin: example.com
+Pull: from-workshop-testing
+Contents: . .gz .bz2
+SignWith: D85E0AC2CC0528E375BDA1BBB52608C81313416F
