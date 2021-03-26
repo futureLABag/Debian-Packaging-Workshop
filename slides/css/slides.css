@@ -1,0 +1,75 @@
+@import "../node_modules/@fontsource/exo/latin.css";
+
+/* Adapt to futureLAB CI a bit */
+.reveal,
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6
+{
+	font-family: "Exo";
+}
+
+.reveal .controls,
+.reveal .progress,
+.reveal a,
+.reveal a:hover
+{
+	color: #00B2A9;
+}
+
+.reveal a {
+	transition: all 300ms;
+}
+.reveal a:hover {
+	opacity: 0.75;
+}
+
+.reveal {
+	background-image: url(../images/logo-futurelab-darkbackground-rgb.svg);
+	background-position: left 12px bottom 15px;
+	background-repeat: no-repeat;
+}
+
+/* Further customizations */
+.multi-column {
+	display: flex;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6
+{
+	text-transform: none;
+}
+
+.middle {
+	vertical-align: middle;
+}
+
+.two-column {
+	display: flex;
+}
+
+.right-image {
+	flex: 1 0 auto;
+}
+
+.right-image img {
+	width: 100%;
+}
+
+.reveal .centered-block {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.hyphenated-link {
+	word-break: break-all;
+}

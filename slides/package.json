@@ -1,0 +1,20 @@
+{
+  "name": "Debian-Packaging-Workshop",
+  "version": "1.0.0",
+  "description": "Some slides for a Debian packaging workshop",
+  "dependencies": {
+    "@fontsource/exo": "^4.2.2",
+    "reveal.js": "^4.1.0"
+  },
+  "devDependencies": {
+    "http-server": "^0.12.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "http-server -a 127.0.0.1",
+    "build": "npm run-script clean && mkdir -p dist/node_modules/reveal.js && cp -R css javascript images index.html .nojekyll dist && cp -R --no-preserve=mode node_modules/reveal.js/dist node_modules/reveal.js/plugin dist/node_modules/reveal.js",
+    "clean": "rm -rf dist"
+  },
+  "author": "",
+  "license": "CC-BY-SA-4.0"
+}
