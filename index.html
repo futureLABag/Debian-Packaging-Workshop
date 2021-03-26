@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'none'; block-all-mixed-content; style-src 'self' 'unsafe-inline'">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="node_modules/reveal.js/dist/theme/black.css">
+		<link rel="stylesheet" href="node_modules/reveal.js/plugin/highlight/monokai.css">
+		<link rel="stylesheet" href="css/slides.css">
+		<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+		<title>Debian Packaging Workshop</title>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section>
+					<h1>Debian Packaging Workshop</h1>
+					<p>Manfred Stock, <a href="https://www.futurelab.ch/">futureLAB AG</a></p>
+				</section>
+
+				<section>
+					<section>
+						<h2>Package anatomy</h2>
+					</section>
+
+					<section>
+						<h3>Main files</h3>
+						<pre><code data-trim class="plaintext">
+debian/
+├── changelog         # change log, version taken from here
+├── compat            # debhelper compatibility level
+├── control           # package meta data
+├── copyright         # copyright and license information
+├── rules             # executable script to build package
+└── source
+    ├── format        # format of package source
+    └── local-options # used as options for dpkg-source
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>Other useful files I</h3>
+						<dl>
+							<dt><code>debian/<i>package.</i>install</code></dt>
+							<dd>List of files to install, as <code>&lt;source&gt; &lt;target directory&gt;</code> lines</dd>
+							<dt class="fragment" data-fragment-index="1"><code>debian/<i>package.</i>docs</code></dt>
+							<dd class="fragment" data-fragment-index="1">List of files to install as documentation in <code>/usr/share/doc/&lt;package&gt;</code></dd>
+							<dt class="fragment" data-fragment-index="2"><code>debian/<i>package.</i>default</code></dt>
+							<dd class="fragment" data-fragment-index="2">Installed in <code>/etc/default/&lt;package&gt;</code></dd>
+						</dl>
+					</section>
+
+					<section>
+						<h3>Other useful files II</h3>
+						<dl>
+							<dt><code>debian/<i>package.</i>dirs</code></dt>
+							<dd>Extra directories to create</dd>
+							<dt class="fragment" data-fragment-index="1"><code>debian/<i>package.</i>links</code></dt>
+							<dd class="fragment" data-fragment-index="1">Symbolic links to create, as <code>&lt;link target&gt; &lt;link file&gt;</code> lines</dd>
+							<dt class="fragment" data-fragment-index="2"><code>debian/<i>package.</i>gbp.conf</code></dt>
+							<dd class="fragment" data-fragment-index="2">Configuration for <code><a href="https://manpages.debian.org/gbp">gbp</a></code></dd>
+						</dl>
+					</section>
+
+					<section>
+						<h3>Other useful files III</h3>
+						<dl>
+							<dt><code>debian/<i>package.</i>init</code></dt>
+							<dd>Init script</dd>
+							<dt class="fragment" data-fragment-index="1"><code>debian/<i>package.</i>service</code></dt>
+							<dd class="fragment" data-fragment-index="1"><code><a href="https://manpages.debian.org/systemd">systemd</a></code> service file</dd>
+							<dt class="fragment" data-fragment-index="2"><code>debian/<i>package.</i>{preinst,postinst,prerm,postrm}</code></dt>
+							<dd class="fragment" data-fragment-index="2">Maintainer scripts to run during package management operations</dd>
+						</dl>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Package development</h2>
+					</section>
+					<section>
+						<h3>
+							<a
+								href="https://manpages.debian.org/git-buildpackage"
+							><code>git-buildpackage</code></a> I
+						</h3>
+						<ul>
+							<li>Suite to help with Debian packages in Git repositories</li>
+							<li class="fragment">Standard branch layout for upstream source and packaging files</li>
+							<li class="fragment">Support for patches/patch management</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>
+							<a
+								href="https://manpages.debian.org/git-buildpackage"
+							><code>git-buildpackage</code></a> II
+						</h3>
+						<h4>Import upstream source</h4>
+						<pre><code data-trim class="bash">
+mkdir &lt;package&gt;
+cd &lt;package&gt;
+git init
+gbp import-orig &lt;path to upstream tarball&gt;
+						</code></pre>
+
+						<h4 class="fragment" data-fragment-index="1">Import source package</h4>
+						<pre class="fragment" data-fragment-index="1"><code data-trim class="bash">
+gbp import-dsc &lt;path to .dsc file|.dsc URL|apt:&lt;package&gt;&gt;
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>
+							<a
+								href="https://manpages.debian.org/git-buildpackage"
+							><code>git-buildpackage</code></a> III
+						</h3>
+						<h4>Import patches into patch queue branch</h4>
+						<pre><code data-trim class="bash">
+gbp pq import
+						</code></pre>
+						<h4 class="fragment" data-fragment-index="1">Export patches to <code>debian/patches</code></h4>
+						<pre class="fragment" data-fragment-index="1"><code data-trim class="bash">
+gbp pq export
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>Skeleton generation I</h3>
+						<dl>
+							<dt>
+								<a
+									href="https://manpages.debian.org/debmake"
+								><code>debmake</code></a>
+							</dt>
+							<dd>
+								Make a Debian source package
+							</dd>
+							<dt class="fragment" data-fragment-index="1">
+								<a
+									href="https://manpages.debian.org/dh_make"
+								><code>dh_make</code></a>
+							</dt>
+							<dd class="fragment" data-fragment-index="1">
+								Prepare upstream source for Debian packaging
+							</dd>
+							<dt class="fragment" data-fragment-index="2">
+								<a
+									href="https://manpages.debian.org/dh-make-perl"
+								><code>dh-make-perl</code></a>
+							</dt>
+							<dd class="fragment" data-fragment-index="2">
+								Create Debian source packages from Perl modules
+							</dd>
+						</dl>
+					</section>
+
+					<section>
+						<h3>Skeleton generation II</h3>
+						<dl>
+							<dt>
+								<a
+									href="https://manpages.debian.org/debpear"
+								><code>debpear</code></a>
+							</dt>
+							<dd>
+								Build and install PEAR packages as Debian packages
+							</dd>
+							<dt class="fragment" data-fragment-index="1">
+								<a href="https://manpages.debian.org/pkg-php-tools"
+								><code>pkg-php-tools</code></a>
+							</dt>
+							<dd class="fragment" data-fragment-index="1">
+								Packaging tools and scripts for PHP packages
+							</dd>
+							<dt class="fragment" data-fragment-index="2">
+								<a
+									href="https://manpages.debian.org/npm2deb"
+								><code>npm2deb</code></a>
+							</dt>
+							<dd class="fragment" data-fragment-index="2">
+								Create Debian source packages from Node modules
+							</dd>
+						</dl>
+					</section>
+
+					<section>
+						<h3>Package building I</h3>
+						<ul>
+							<li>
+								Basic command: <a
+									href="https://manpages.debian.org/dpkg-buildpackage"
+								><code>dpkg-buildpackage</code></a>
+							</li>
+							<li class="fragment">
+								When using <a
+									href="https://manpages.debian.org/git-buildpackage"><code>git-buildpackage</code></a>:
+								<a
+									href="https://manpages.debian.org/gbp-buildpackage"
+								><code>gbp buildpackage</code></a>
+								<ul>
+									<li>Add Git tag upon successful build: Pass <code>--git-tag</code> option</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>Package building II</h3>
+						<ul>
+							<li>
+								If clean environment for build is wanted, take a look at <a
+									href="https://manpages.debian.org/pbuilder"
+								><code>pbuilder</code></a>, <a
+									href="https://manpages.debian.org/cowbuilder"
+								><code>cowbuilder</code></a>, <a
+									href="https://manpages.debian.org/qemubuilder"
+								><code>qemubuilder</code></a>
+							<li class="fragment">
+								<a
+									href="https://manpages.debian.org/gbp-buildpackage"
+								><code>gbp buildpackage</code></a> supports these via
+								<code>--git-pbuilder</code> and <code>--git-qemubuilder</code>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>Helper utilities</h3>
+						<dl>
+							<dt>
+								<a
+									href="https://manpages.debian.org/debchange"
+								><code>debchange</code></a>
+							</dt>
+							<dd>
+								Add <code>changelog</code> entry
+							</dd>
+							<dt class="fragment" data-fragment-index="1">
+								<a
+									href="https://manpages.debian.org/debi"
+								><code>debi</code></a>
+							</dt>
+							<dd class="fragment" data-fragment-index="1">
+								Install built package
+							</dd>
+							<dt class="fragment" data-fragment-index="2">
+								<a
+									href="https://manpages.debian.org/debrelease"
+								><code>debrelease</code></a>/<a
+									href="https://manpages.debian.org/dupload"
+								><code>dupload</code></a>
+							</dt>
+							<dd class="fragment" data-fragment-index="2">
+								Upload built package
+							</dd>
+							<dt class="fragment" data-fragment-index="3">
+								<a
+									href="https://manpages.debian.org/schroot"
+								><code>schroot</code></a>
+							</dt>
+							<dd class="fragment" data-fragment-index="3">
+								Execute commands in a <code>chroot</code> environment
+							</dd>
+						</dl>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Package repository</h2>
+					</section>
+
+					<section>
+						<h3>
+							<a
+								href="https://manpages.debian.org/reprepro"
+							><code>reprepro</code></a>
+						</h3>
+					</section>
+				</section>
+
+				<section>
+					<h2>Resources</h2>
+					<ul>
+						<li>
+							<a
+								class="hyphenated-link"
+								href="https://www.debian.org/doc/manuals/debmake-doc/"
+							>https://www.debian.org/doc/manuals/debmake-doc/</a> - Guide for Debian Maintainers
+						</li>
+						<li>
+							<a
+								href="https://wiki.debian.org/git-pbuilder"
+							>https://wiki.debian.org/git-pbuilder</a> - Tutorial for <a
+								href="https://manpages.debian.org/git-pbuilder"
+							><code>git-pbuilder</code></a>
+						</li>
+					</ul>
+				</section>
+			</div>
+		</div>
+		<script src="node_modules/reveal.js/dist/reveal.js"></script>
+		<script src="node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="javascript/slides.js"></script>
+	</body>
+</html>
