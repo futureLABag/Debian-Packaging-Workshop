@@ -283,6 +283,19 @@ gbp pq export
 								href="https://manpages.debian.org/reprepro"
 							><code>reprepro</code></a>
 						</h3>
+						<ul>
+							<li>Produce, manage and sync a local repository of Debian packages</li>
+						</ul>
+						<pre class="fragment"><code data-trim class="bash">
+# Process uploads to given distribution:
+reprepro processincoming &lt;distribution&gt;
+# Update packages from configured source distribution:
+reprepro pull &lt;distribution&gt;
+# Copy packages between distributions:
+reprepro copy &lt;src-dist&gt; &lt;target-dist&gt; &lt;packages&gt;
+# Import given .deb into distribution:
+reprepro includedeb &lt;distribution&gt; &lt;.deb&gt;
+						</code></pre>
 					</section>
 				</section>
 
@@ -301,6 +314,11 @@ gbp pq export
 							>https://wiki.debian.org/git-pbuilder</a> - Tutorial for <a
 								href="https://manpages.debian.org/git-pbuilder"
 							><code>git-pbuilder</code></a>
+						</li>
+						<li>
+							<a
+								href="https://jenkins-debian-glue.org/"
+							>https://jenkins-debian-glue.org/</a> - Continuous Integration for Debian and Ubuntu made easy
 						</li>
 					</ul>
 				</section>
