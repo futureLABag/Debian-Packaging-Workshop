@@ -12,7 +12,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "http-server -a 127.0.0.1",
-    "build": "npm run-script clean && mkdir -p dist/node_modules/reveal.js && cp -R css javascript images index.html .nojekyll dist && cp -R --no-preserve=mode node_modules/reveal.js/dist node_modules/reveal.js/plugin dist/node_modules/reveal.js",
+    "build": "npm run-script clean && mkdir -p dist/node_modules/reveal.js && cp -R css javascript images index.html .nojekyll dist && cp -R --no-preserve=mode node_modules/reveal.js/dist node_modules/reveal.js/plugin dist/node_modules/reveal.js && cp -R --no-preserve=mode node_modules/@fontsource dist/node_modules",
     "clean": "rm -rf dist"
   },
   "author": "",
