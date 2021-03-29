@@ -33,6 +33,7 @@ to your ~/.dupload.conf"
 	mkdir -p perl
 	(
 		cd perl
+		wget -c https://cpan.metacpan.org/authors/id/M/MS/MSTOCK/App-Scaffolder-0.001000.tar.gz
 		wget -c https://cpan.metacpan.org/authors/id/M/MS/MSTOCK/App-Scaffolder-0.002000.tar.gz
 	)
 )
