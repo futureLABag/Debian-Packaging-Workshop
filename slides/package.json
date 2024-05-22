@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "Some slides for a Debian packaging workshop",
   "dependencies": {
-    "@fontsource/exo": "^4.2.2",
-    "reveal.js": "^4.1.0"
+    "@fontsource/exo": "^5.0.18",
+    "reveal.js": "^5.1.0"
   },
   "devDependencies": {
-    "http-server": "^0.12.3"
+    "http-server": "^14.1.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
