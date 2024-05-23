@@ -255,9 +255,27 @@ gbp pq export
 							<li class="fragment">
 								<a
 									href="https://manpages.debian.org/sbuild"
-								><code>sbuild</code></a> might also be worth a look, this can use <a
+								><code>sbuild</code></a> is also worth a look, this can use <a
 									href="https://manpages.debian.org/schroot"
-								><code>schroot</code></a> for package builds
+								><code>schroot</code></a> or namespaces for package builds
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>Package builds with <a href="https://wiki.debian.org/sbuild"><code>sbuild</code></a></h3>
+						<ul>
+							<li>
+								Prepare <code>sbuild</code> chroot: <code>mmdebstrap --variant=buildd bookworm ~/.cache/sbuild/bookworm-amd64.tar.zst</code>
+							</li>
+							<li class="fragment">
+								Run build: <code>gbp buildpackage --git-builder=sbuild --dist bookworm --chroot-mode unshare</code>
+							</li>
+							<li class="fragment">
+								<a href="https://wiki.debian.org/sbuild#Option_1:_Using_unshare_with_mmdebstrap_.28no_root_needed.29"><code>sbuild</code> options can also be set in <code>~/.sbuildrc</code></a>
+							</li>
+							<li class="fragment">
+								<a href="https://wiki.debian.org/sbuild#Integration_with_gbp_.28gbp-buildpackage.29">Git builder can also be configured in <code>~/.gbp.conf</code></a>
 							</li>
 						</ul>
 					</section>
