@@ -268,7 +268,7 @@ gbp pq export
 								Prepare <code>sbuild</code> chroot: <code>mmdebstrap --variant=buildd bookworm ~/.cache/sbuild/bookworm-amd64.tar.zst</code>
 							</li>
 							<li class="fragment">
-								Run build: <code>gbp buildpackage --git-builder=sbuild --dist bookworm --chroot-mode unshare</code>
+								Run build: <code>gbp buildpackage --git-builder=sbuild [--source] --arch-all --dist bookworm --chroot-mode unshare</code>
 							</li>
 							<li class="fragment">
 								<a href="https://wiki.debian.org/sbuild#Option_1:_Using_unshare_with_mmdebstrap_.28no_root_needed.29"><code>sbuild</code> options can also be set in <code>~/.sbuildrc</code></a>
