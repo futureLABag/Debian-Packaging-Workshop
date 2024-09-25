@@ -274,8 +274,9 @@ gbp pq export
 							<li class="fragment">
 								Run build:
 								<pre><code data-trim class="bash">
-								gbp buildpackage --git-builder=sbuild [--source] \
-									--arch-all --dist bookworm --chroot-mode unshare
+								gbp buildpackage [--git-tag] --git-builder=sbuild \
+									[--source] [--force-orig-source] --arch-all \
+									--dist bookworm --chroot-mode unshare
 								</code></pre>
 							</li>
 							<li class="fragment">
